@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Date from "../components/date";
@@ -6,6 +7,10 @@ import Layout, { siteTitle } from "../components/layout";
 import styles from "../styles/Home.module.css";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData, PostData } from "../lib/posts";
+
+interface Props {
+  allPostsData: PostData[];
+}
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -16,7 +21,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ allPostsData }: PostData[]) {
+const Home: React.FC<Props> = ({ allPostsData }) => {
   return (
     <Layout home>
       <Head>
@@ -50,4 +55,6 @@ export default function Home({ allPostsData }: PostData[]) {
       </section>
     </Layout>
   );
-}
+};
+
+export default Home;
