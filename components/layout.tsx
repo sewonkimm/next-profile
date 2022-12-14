@@ -11,7 +11,10 @@ export const siteTitle = "Profile of sewonkimm";
 export default function Layout({
   children,
   home,
-}: React.PropsWithChildren<{ home?: boolean }>) {
+}: {
+  children: React.ReactNode;
+  home?: boolean;
+}) {
   return (
     <div className={styles.container}>
       <Head>
