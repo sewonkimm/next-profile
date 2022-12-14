@@ -1,25 +1,30 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Date from "../components/date";
 import Layout, { siteTitle } from "../components/layout";
 import styles from "../styles/Home.module.css";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData, PostData } from "../lib/posts";
+import { getSortedPostsData } from "../lib/posts";
 
 interface Props {
-  allPostsData: PostData[];
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
 
 const Home: React.FC<Props> = ({ allPostsData }) => {
   return (
